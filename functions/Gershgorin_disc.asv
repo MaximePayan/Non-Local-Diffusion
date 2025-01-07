@@ -1,0 +1,13 @@
+function [Centers,Radiuses] = Gershgorin_disc(M,on_columns)
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+if nargin<2
+    on_columns = false;
+end
+Centers = diag(M);
+N = length(Centers);
+Radiuses = zeros(N,1);
+for i=1:N-1
+    Radiuses(i) = sum(abs(M(i,[1:i-1,i+1:end])));
+end
+

@@ -1,0 +1,12 @@
+function [FU,DFU] = functional(Utilde,Ubartilde,f_Df)
+% Ubartilde = (lambdabar, Ubar) numerical eigenmode
+% Utilde = (lambda,U) current point
+N = length(Utilde)-1;
+U = Utilde(2:end);
+lambda = Utilde(1);
+[~,Df] = f_Df(Ubartilde(2:end));
+FU = [Ubartilde(2:end)'*U-1; Df*U - lambda*U];
+DFU = [0,Ubartilde(2:end)';
+      -U, Df - lambda*eye(N)];
+end
+
