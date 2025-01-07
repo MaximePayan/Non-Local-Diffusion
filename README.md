@@ -7,3 +7,5 @@ The proof of the main result is in two parts:
   
 Optional:
 - lunch radii_analysis.m with N = 5, p = 1.7, delta = 1 or 4, lunch it without Intlab to get Fig 2 and Fig 3.
+
+The figures are already loaded.
