@@ -53,8 +53,8 @@ for i=1:length(index_nan)
     end
     lp = -A(1,Ndiag+D+2:2*Ndiag+D+1)*B*u;
     if Z1 + Z2*r_min < 1
-        b1 = C*abs(A(1,Ndiag+D+2:2*Ndiag+D+1))*chi_q*r_min + norme_alpha(abs(A(2:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha)*r_min;
-        b2 = norme_alpha(abs(A(Ndiag+D+2:2*Ndiag+D+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha)*r_min+2*C*E_maj*r_min;
+        b1 = C*abs(A(1,Ndiag+D+2:2*Ndiag+D+1))*chi_q*r_min + C*norme_alpha(abs(A(2:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha)*r_min;
+        b2 = C*norme_alpha(abs(A(Ndiag+D+2:2*Ndiag+D+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha)*r_min+2*C*E_maj*r_min;
         b3 = 2*C*E_maj*abs(u)'*chi_q*r_min + (Z1+Z2*r_min)*norme_RL1L1(A_app*[0;zeros(Ndiag,1);B*u],alpha); 
         bound_lp = (b1+b2+b3)/(1-(Z1+Z2*r_min));
     else
