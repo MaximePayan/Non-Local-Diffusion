@@ -29,6 +29,9 @@ else
     else
         [~,Df] = f_Df(zeros(2*Ndiag,1),B,params);
         [eigVec,eigVal] = my_eig(Df);
+        if eigVec(1,1) < 0
+            eigVec(:,1) = -eigVec(:,1);
+        end
         Ubartilde = [eigVal(1,1); eigVec(:,1)];
     end
     F = @(Utilde) functional(Utilde,Ubartilde,@(U) f_Df(U,B,params));
@@ -83,7 +86,7 @@ bounds = [Y,Z1,Z2];
 %% 
 disc = (1-Z1)^2 - 4*Z2*Y;
 if disc > 0
-    r_min = ((1-Z1) - sqrt(disc))/(2*Z2); r_max = ((1-Z1) + sqrt(disc))/(2*Z2);
+    r_min = ((1-Z1) - sqrt(disc))/(2*Z2); r_max = (1-Z1)/Z2;
     if class(ipi) == "intval"
         r_min = r_min.sup;
         r_max = r_max.inf;
