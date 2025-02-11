@@ -14,8 +14,8 @@ params.domain = [0 2];
 params.domain1 = [pi/4 pi/2];
 params.domain2 = [pi/5 pi/2+0.25];
 
-Ndiag = 5; % to test 10; 50; 100;
-p = 1.7; % to test 0.5; 1; 2; 2.9
+Ndiag = 20; % to test 10; 50; 100;
+p = 2; % to test 0.5; 1; 2; 2.9
 parameter_f = {@(x) x.^p,p,"pow"};
 
 [B,C,q] = init_B(1,pi,Ndiag,params.domain,params.domain1,params.domain2);
@@ -37,7 +37,7 @@ if exist('intval','file')
     params_intval.b = intval(params.b);
     params_intval.c = intval(params.c);
     params_intval.d = intval(params.d);
-    params_intval.delta = infsup(max(params.delta-dd,0),params.delta+dd);%intval(params.delta);
+    params_intval.delta = intval(params.delta);%infsup(max(params.delta-dd,0),params.delta+dd);
     params_intval.theta = intval(params.theta);
     params_intval.domain1 = [ipi/4 ipi/2];%intval(params.domain1);%
     params_intval.domain2 = [ipi/5 ipi/2+intval(0.25)];%intval(params.domain2);%
@@ -45,6 +45,6 @@ if exist('intval','file')
     parameter_B_intval = {B_intval,C_intval,q_intval};
     parameter_f_intval = {@(x) x.^intval(p),intval(p),"pow"};
     disp("Rigorous calculations with Intlab")
-    [RadiiBounds,prec,M4_intval,faraway_max] = test_radii_anlysis_v2test_radii_anlysis_v2(params_intval,ipi,parameter_f_intval,parameter_B_intval);
+    [RadiiBounds,prec,M4_intval,faraway_max] = test_radii_anlysis_v2(params_intval,ipi,parameter_f_intval,parameter_B_intval,prec);
     [one_positivity,one_isolation,mu,d0]=spectrum_analysis(M4_intval,RadiiBounds,faraway_max,true);
 end

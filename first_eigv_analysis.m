@@ -1,5 +1,5 @@
 addpath functions
-clear all
+%clear all
 load first_eigv_wrt_delta_temp.mat
 
 Ndiag = size(parameter_B{1},1);
@@ -36,7 +36,7 @@ for i=1:length(index_nan)
         params.delta = delta;
         params_intval = params;
     end
-    [~,~,~,~,prec] = script_nonlocal_diff_v2(parameter_B,params,D,alpha);
+    [~,~,~,~,prec] = script_nonlocal_diff_v2(parameter_B,params,D,alpha,Ubartilde(:,i));
     [A,E_maj,chi_q,bounds,~] = script_nonlocal_diff_v2(parameter_B_intval,params_intval,D,alpha,prec);
     A_app = prec{3}; Utilde = prec{2}; 
     Y = bounds(1).sup

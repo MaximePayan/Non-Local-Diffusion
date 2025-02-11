@@ -24,10 +24,13 @@ if class(params.delta) == "intval"
     I = intval(eye(2*Ndiag+1));
 else
     ipi = pi;
-    [~,Df] = f_Df(zeros(2*Ndiag,1),B,params);
-    [eigVec,eigVal] = my_eig(Df);
-    Ubartilde = [eigVal(1,1); eigVec(:,1)];
-
+    if nargin == 5 && class(prec) == "double"
+        Ubartilde = prec;
+    else
+        [~,Df] = f_Df(zeros(2*Ndiag,1),B,params);
+        [eigVec,eigVal] = my_eig(Df);
+        Ubartilde = [eigVal(1,1); eigVec(:,1)];
+    end
     F = @(Utilde) functional(Utilde,Ubartilde,@(U) f_Df(U,B,params));
     [Utilde,~] = func_Newton(Ubartilde,F);
     [FU,DFU] = F(Utilde);
