@@ -89,52 +89,55 @@ else
     title('Bounds without intlab')
     legend('Location','best')
 
-    tiledlayout(3,1)
+    tiledlayout(2,1)
+    color = ["#336d89","#b240ff","#0072BD"];
     sizefont = 20;
     ax1=nexttile;
     hold on
     for i=1:length(Centers)
         plot(ax1,real(Centers(i)),imag(Centers(i)),'k.');
-        plot(ax1,Centers(i) + RadiiBounds(i)*exp(1i*theta),'LineWidth',3,'Color',"#0072BD")
+        plot(ax1,Centers(i) + RadiiBounds(i)*exp(1i*theta),'LineWidth',3,'Color',color(3))
     end
+    %ticks = xticks;
+    plot(ax1,0,0)
+    plot(ax1,1.01*faraway_max,0)
+    plot(ax1,mu,0)
+    ax1.FontSize = sizefont;
     axis(ax1, "equal")
     limity = ylim(ax1);
-    %ticks = xticks;
-    plot(ax1,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',"#0072BD")
-    %text(ax1,0-0.4*abs(ticks(2)-ticks(1)),0.9*limity(2),"y=0",'Color',"#0072BD",'FontSize',sizefont)
+    plot(ax1,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',color(3))
     plot(ax1,[faraway_max, faraway_max],limity,'--','LineWidth',2,'Color','black','DisplayName','x=M_{N,p}')
     plot(ax1,[mu, mu],limity,'LineWidth',2,'Color','black','DisplayName','x=\mu')
-    %text(ax1,faraway_max_prec+0.1*abs(ticks(2)-ticks(1)),0.9*limity(2),"y=max_{i\geq 2N}(R_i+c_i)",'Color',"black",'FontSize',sizefont)
-    ax1.FontSize = sizefont;
-
+    %limitx = xlim(ax1);
+    %xlim(limitx+0.01*(limitx(2)-limitx(1)))
     ax2 = nexttile;
     hold on
-    for i=1:5
+    for i=1:2
         plot(ax2,real(Centers(i)),imag(Centers(i)),'k.');
-        plot(ax2,Centers(i) + RadiiBounds(i)*exp(1i*theta),'LineWidth',3,'Color',"#0072BD")
+        plot(ax2,Centers(i) + RadiiBounds(i)*exp(1i*theta),'LineWidth',3,'Color',color(3))
     end
     plot(ax2,0,0,"-")
-    xlim(ax2,[-3.5 1])
+    %xlim(ax2,[-3.5 1])
     axis(ax2, "equal")
     limity = ylim(ax2);
     %ticks = xticks;
-    plot(ax2,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',"#0072BD")
-    plot(ax2,[faraway_max, faraway_max],limity,'--','LineWidth',2,'Color','black','DisplayName','Closest away circle')
+    plot(ax2,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',color(3))
+    %plot(ax2,[faraway_max, faraway_max],limity,'--','LineWidth',2,'Color','black','DisplayName','Closest away circle')
     plot(ax2,[mu, mu],limity,'LineWidth',2,'Color','black','DisplayName','x=\mu')
     %text(ax2,0-0.4*abs(ticks(2)-ticks(1)),0.9*limity(2),"y=0",'Color',"#0072BD",'FontSize',sizefont)
     ax2.FontSize = sizefont;
 
-    ax3 = nexttile;
-    hold on
-    plot(ax3,real(Centers(1)),imag(Centers(1)),'k.');
-    plot(ax3,Centers(1) + RadiiBounds(1)*exp(1i*theta),'LineWidth',3,'Color',"#0072BD")
-    plot(ax3,0,0,"-")
-    axis(ax3, "equal")
-    limity = ylim(ax3);
-    %ticks = xticks;
-    plot(ax3,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',"#0072BD")
-    %text(ax3,0+0.1*abs(ticks(2)-ticks(1)),0.9*limity(2),"y=0",'Color',"#0072BD",'FontSize',sizefont)
-    ax3.FontSize = sizefont;
+%     ax3 = nexttile;
+%     hold on
+%     plot(ax3,real(Centers(1)),imag(Centers(1)),'k.');
+%     plot(ax3,Centers(1) + RadiiBounds(1)*exp(1i*theta),'LineWidth',3,'Color',color(3))
+%     plot(ax3,0,0,"-")
+%     axis(ax3, "equal")
+%     limity = ylim(ax3);
+%     %ticks = xticks;
+%     plot(ax3,[0, 0],limity,'--','LineWidth',2,'DisplayName','x=0','Color',color(3))
+%     %text(ax3,0+0.1*abs(ticks(2)-ticks(1)),0.9*limity(2),"y=0",'Color',"#0072BD",'FontSize',sizefont)
+%     ax3.FontSize = sizefont;
 end
 end
 end

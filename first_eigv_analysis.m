@@ -66,6 +66,7 @@ for i=1:length(index_nan)
 end
 %%
 fig  = true;
+color = ["#D95319","r","#0072BD","#b240ff","k"];
 if fig
     if exist('intval','file')
         figure
@@ -74,12 +75,18 @@ if fig
         hold on
         for i =1:length(index_nan)
             delta = V(index_nan(i),1);
-            rectangle(ax1,'Position',[delta.inf, ...
-                lambda_p(i).inf-bound_lambda_p(i).sup,2.*delta.rad,2.*(lambda_p(i).rad+bound_lambda_p(i).sup)],'EdgeColor','b','LineStyle','-','LineWidth',2)
+%             rectangle(ax1,'Position',[delta.inf, ...
+%                 lambda_p(i).inf-bound_lambda_p(i).sup,2.*delta.rad,2.*(lambda_p(i).rad+bound_lambda_p(i).sup)],'EdgeColor','b','LineStyle','-','LineWidth',2)
+            plot([delta.inf,delta.sup],[lambda_p(i).inf-bound_lambda_p(i).sup, lambda_p(i).inf-bound_lambda_p(i).sup],'Color',color(3),'LineStyle','-','LineWidth',2)
+            plot([delta.inf,delta.sup],[lambda_p(i).sup+bound_lambda_p(i).sup, lambda_p(i).sup+bound_lambda_p(i).sup],'Color',color(4),'LineStyle','-','LineWidth',2)
+            if i < length(index_nan)
+                plot([delta.sup,delta.sup],[lambda_p(i).inf-bound_lambda_p(i).sup, lambda_p(i+1).inf-bound_lambda_p(i+1).sup],'Color',color(3),'LineStyle','-','LineWidth',2)
+                plot([delta.sup,delta.sup],[lambda_p(i).sup+bound_lambda_p(i).sup, lambda_p(i+1).sup+bound_lambda_p(i+1).sup],'Color',color(4),'LineStyle','-','LineWidth',2)
+            end
         end
         
-        xlabel('\delta',FontSize=33)
-        ylabel("Re(d_0')",'Rotation',0,FontSize=33,HorizontalAlignment='right')
+        %xlabel('\delta',FontSize=33)
+        %ylabel("Re(d_0')",'Rotation',0,FontSize=33,HorizontalAlignment='right')
         ax1.FontSize = sizefont;
         xlim(ax1,[V(index_nan(1),1).inf,V(index_nan(end),1).sup])
         axis(ax1,'normal')
@@ -96,11 +103,17 @@ if fig
 %             plot(ax2,delta.mid,lambda(i).mid, 'bo' )
 %             draw_circ_arc([delta.mid,lambda(i).mid],0.001,[delta.mid,lambda(i).mid]+delta.rad*[1,p1]./sqrt(1+p1^2),...
 %                 [delta.mid,lambda(i).mid]+delta.rad.*[1,p2]./sqrt(1+p2^2));
-            rectangle(ax2,'Position',[delta.inf, ...
-                lambda(i).inf,2.*delta.rad,2.*lambda(i).rad],'EdgeColor','b','LineStyle','-','LineWidth',2)
+%             rectangle(ax2,'Position',[delta.inf, ...
+%                 lambda(i).inf,2.*delta.rad,2.*lambda(i).rad],'EdgeColor','b','LineStyle','-','LineWidth',2)
+            plot([delta.inf,delta.sup],[lambda(i).inf, lambda(i).inf],'Color',color(3),'LineStyle','-','LineWidth',2)
+            plot([delta.inf,delta.sup],[lambda(i).sup, lambda(i).sup],'Color',color(4),'LineStyle','-','LineWidth',2)
+            if i < length(index_nan)
+                plot([delta.sup,delta.sup],[lambda(i).inf, lambda(i+1).inf],'Color',color(3),'LineStyle','-','LineWidth',2)
+                plot([delta.sup,delta.sup],[lambda(i).sup, lambda(i+1).sup],'Color',color(4),'LineStyle','-','LineWidth',2)
+            end
         end
-        xlabel('\delta',FontSize=33)
-        ylabel("Re(d_0)",'Rotation',0,FontSize=33,HorizontalAlignment='right')
+        %xlabel('\delta',FontSize=33)
+        %ylabel("Re(d_0)",'Rotation',0,FontSize=33,HorizontalAlignment='right')
         ax2.FontSize = sizefont;
         xlim(ax2,[V(index_nan(1),1).inf,V(index_nan(end),1).sup])
         axis(ax2,'normal')

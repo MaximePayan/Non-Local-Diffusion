@@ -52,37 +52,46 @@ if exist('intval','file')
     save("first_eigv_wrt_delta_temp.mat",'Ddelta','V','params_intval','params','parameter_B','parameter_B_intval')
     color_index = V(:,5).mid + 2*V(:,6).mid + 1;
     color_index = fillmissing(color_index,'constant',5);
-    figure
+    %tiledlayout(1,2, TileSpacing="tight",Padding="loose")
+    %ax1 = nexttile;
     ax1 = axes;
     sizefont = 20;
-    plot(real(V(:,1).mid),real(V(:,2).mid),'ko')
+    %plot(real(V(:,1).mid),real(V(:,2).mid),'ko')
     hold on
     for i =1:length(Ddelta)-1
         rectangle('Position',[real(V(i,1).inf),real(V(i,2).inf-V(i,3).sup),V(i,1).sup-V(i,1).inf,real(V(i,2).sup-V(i,2).inf + 2*V(i,3).sup)],'EdgeColor',color(color_index(i)),'LineStyle','-','LineWidth',2)
     end
     xlim([0 4])
-    xlabel("\delta")
-    ylabel("Re(d_0)","Rotation",0,"HorizontalAlignment","center")
-    axis(ax1,'normal')
+    %xlabel("\delta")
+    %ax1.XTickLabel = {'','','',''};
+    %ylabel("Re(d_0)","Rotation",0,"HorizontalAlignment","center")
+    axis(ax1,'square')
+    yax1 = ylim(ax1);
     ax1.FontSize = sizefont;
     ax1.Box = 'on';
+    %ax1.XGrid = 'on';
     ax1.PositionConstraint = 'InnerPosition';
     ax1.InnerPosition = [0.15, 0.15, 0.75, 0.75];
     
-    figure
-    ax2 = axes;
+    %ax2 = nexttile;
+    ax2 = ax1;
     hold on
     for i =1:length(Ddelta)-1
-        plot([V(i,1).inf,V(i,1).sup],[V(i,4).sup V(i,4).sup],'-b','LineWidth',2)
+        plot([V(i,1).inf,V(i,1).sup],[V(i,4).sup V(i,4).sup],'-','LineWidth',2,'Color',"#0072BD")
     end
-    xlim([0 4])
-    xlabel("\delta")
-    ylabel("\mu","Rotation",0,"HorizontalAlignment","left")
-    axis(ax2,'normal')
-    ax2.FontSize = sizefont;
-    ax2.Box = 'on';
-    ax2.PositionConstraint = 'InnerPosition';
-    ax2.InnerPosition = [0.15, 0.15, 0.75, 0.75];
+    %xlim([0 4])
+    %xlabel("\delta")
+    %ylabel("\mu","Rotation",0,"HorizontalAlignment","left")
+    %axis(ax2,'normal')
+    %yax2 = ylim(ax2);
+    %m_yax2 = (yax2(2)+yax2(1))/2;
+    %demi_yax1 = (yax1(2)-yax1(1))/2;
+    %ylim(ax2, [m_yax2-demi_yax1 m_yax2+demi_yax1]); 
+    %ax2.FontSize = sizefont;
+    %ax2.Box = 'on';
+    %ax2.XGrid = 'on';
+    %ax2.PositionConstraint = 'InnerPosition';
+    %ax2.InnerPosition = [0.15, 0.15, 0.75, 0.75];
 
 else
     save("first_eigv_wrt_delta_temp.mat",'Ddelta','V','params','parameter_B')

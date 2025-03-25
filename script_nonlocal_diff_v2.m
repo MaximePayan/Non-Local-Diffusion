@@ -69,9 +69,9 @@ Y = norme_RL1L1(A([1:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1],[1:Ndiag+1,Ndiag+D+2:2*Ndiag
     2*C*abs(params.delta)*abs(Utilde(2:Ndiag+1))'*chi_q*E_maj;
 %% Z1
 Mat = I - A([1:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1],[1:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1])*DFU;
-Z1a = norme_RL1L1(Mat,alpha,true);
+Z1a = norme_RL1L1(Mat,alpha,true) + 2*C*E_maj;
 Z1b = C*abs(params.delta)/(2*Ndiag^(q+alpha)) * ((abs(A(1,Ndiag+D+2:2*Ndiag+D+1))*chi_q) + norme_alpha(abs(A(2:Ndiag+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha) + norme_alpha(abs(A(Ndiag+D+2:2*Ndiag+D+1,Ndiag+D+2:2*Ndiag+D+1))*chi_q,alpha)) ...
-    + abs(params.c)*R2_N+2*C*abs(params.delta)*E_maj;
+    + abs(params.c)*R2_N+C*abs(params.delta)*E_maj/Ndiag^(q+alpha);
 Z1c = abs(params.b)*R1_N;
 Z1 = max([Z1a, Z1b, Z1c]);
 %% Z2

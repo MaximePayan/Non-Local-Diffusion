@@ -14,8 +14,8 @@ params.domain = [0 2];
 params.domain1 = [pi/4 pi/2];
 params.domain2 = [pi/5 pi/2+0.25];
 
-Ndiag = 20; % to test 10; 50; 100;
-p = 2; % to test 0.5; 1; 2; 2.9
+Ndiag = 5; % to test 10; 50; 100;
+p = 1.7; % to test 0.5; 1; 2; 2.9
 parameter_f = {@(x) x.^p,p,"pow"};
 
 [B,C,q] = init_B(1,pi,Ndiag,params.domain,params.domain1,params.domain2);
